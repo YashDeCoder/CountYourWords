@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class CountYourWords {
     /*
-     * Sorting method for dictionaries
+     * Sorting method for dictionaries. It assumes that wordCounts only contains lower case strings.
      * 
      * @param HashMap[String, Integer] wordCounts
      * @return ArrayList<String> sortedWordCounts
@@ -17,7 +17,7 @@ public class CountYourWords {
     }
     
     /*
-     * Counting words in text file
+     * Count words in text file. The function will convert everything into lower case.
      * 
      * @param List of Strings
      * @return Int totalWords, HashMap[String, Integer] wordCounts
