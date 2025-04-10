@@ -1,7 +1,7 @@
 package main;
 import java.util.HashMap;
 
-final class Pair {
+public final class Pair {
     private final int totalCount;
     private final HashMap<String, Integer> wordCounts;
     
