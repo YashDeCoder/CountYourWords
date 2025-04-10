@@ -30,7 +30,7 @@ public class CountYourWords {
     }
 
     /*
-     * Reads the file
+     * Reads the file, it is assumed that the file uses periods as delimiters.
      * 
      * @param String path
      * @return List of Strings
