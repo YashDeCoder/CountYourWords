@@ -17,7 +17,7 @@ public class CountYourWords {
     }
     
     /*
-     * Count words in text file. The function will convert everything into lower case.
+     * Count words in text file. The function will convert everything into lower case and remove numbers or symbols.
      * 
      * @param List of Strings
      * @return Int totalWords, HashMap[String, Integer] wordCounts
