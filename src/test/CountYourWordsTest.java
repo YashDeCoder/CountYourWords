@@ -213,13 +213,13 @@ public class CountYourWordsTest {
     // Test reading a valid file with known content
     @Test
     public void testReadValidFile() throws Exception {
-        ArrayList<String> fileLines = CountYourWords.readFile("./src/test/textTests/emptyFile.txt");
+        ArrayList<String> fileLines = CountYourWords.readFile("./src/test/textTests/validFile.txt");
 
         // Assert
         assertNotNull("File lines should not be null", fileLines);
         assertEquals("File should contain 3 lines", 3, fileLines.size());
-        assertEquals("First line", fileLines.get(0));
-        assertEquals("Second line", fileLines.get(1));
-        assertEquals("Third line", fileLines.get(2));
+        assertEquals("First line.", fileLines.get(0));
+        assertEquals("Second line.", fileLines.get(1));
+        assertEquals("Third line.", fileLines.get(2));
     }
 }
