@@ -1,16 +1,18 @@
 package main;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class CountYourWords {
     /*
      * Sorting method for dictionaries
      * 
      * @param HashMap[String, Integer] wordCounts
-     * @return HashMap[String, Integer] SortedWordCounts
+     * @return ArrayList<String> sortedWordCounts
      */
-    public static HashMap<String, Integer> sort(HashMap<String, Integer> wordCounts) {
-        HashMap<String, Integer> sortedWordCounts = new HashMap<>();
+    public static ArrayList<String> sort(HashMap<String, Integer> wordCounts) {
+        ArrayList<String> sortedWordCounts = new ArrayList<>();
         return sortedWordCounts;
     }
     
@@ -35,7 +37,15 @@ public class CountYourWords {
      */
     public static ArrayList<String> readFile(String path) throws Exception {
         ArrayList<String> fileLines = new ArrayList<>();
+        File file = new File(path);
+        Scanner sc = new Scanner(file);
+        sc.useDelimiter(".");
 
+        while (sc.hasNextLine()) {
+            fileLines.add(sc.nextLine());
+        }
+
+        sc.close();
         return fileLines;
     }
 }
