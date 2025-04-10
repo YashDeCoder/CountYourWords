@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 import main.CountYourWords;
+import main.Pair;
 
 public class CountYourWordsTest {
     // Sorting algorithm
@@ -42,8 +43,152 @@ public class CountYourWordsTest {
 
         assertEquals("Keys should be sorted", expectedKeys, actualKeys);
     }
-        
-    // Count the words in a list of lines
     
-    // Read from file
+    // Count
+    @Test
+    public void testEmptyFile() {
+        ArrayList<String> fileLines = new ArrayList<>();
+        Pair result = CountYourWords.count(fileLines);
+
+        assertEquals("Total words should be 0", 0, result.getFirst());
+        assertTrue("Word counts map should be empty", result.getSecond().isEmpty());
+    }
+
+    // Test with a single line
+    @Test
+    public void testSingleLine() {
+        ArrayList<String> fileLines = new ArrayList<>();
+        fileLines.add("Hello world");
+
+        Pair result = CountYourWords.count(fileLines);
+
+        assertEquals("Total words should be 2", 2, result.getFirst());
+
+        HashMap<String, Integer> expectedCounts = new HashMap<>();
+        expectedCounts.put("hello", 1);
+        expectedCounts.put("world", 1);
+
+        assertEquals("Word counts should match expected counts", expectedCounts, result.getSecond());
+    }
+
+    // Test with multiple lines
+    @Test
+    public void testMultipleLines() {
+        ArrayList<String> fileLines = new ArrayList<>();
+        fileLines.add("Hello world");
+        fileLines.add("This is a test.");
+        fileLines.add("World of Java!");
+
+        Pair result = CountYourWords.count(fileLines);
+
+        assertEquals("Total words should be 8", 8, result.getFirst());
+
+        HashMap<String, Integer> expectedCounts = new HashMap<>();
+        expectedCounts.put("hello", 1);
+        expectedCounts.put("world", 2);
+        expectedCounts.put("this", 1);
+        expectedCounts.put("is", 1);
+        expectedCounts.put("a", 1);
+        expectedCounts.put("test", 1);
+        expectedCounts.put("of", 1);
+        expectedCounts.put("java", 1);
+
+        assertEquals("Word counts should match expected counts", expectedCounts, result.getSecond());
+    }
+
+    // Test with words of varying cases
+    @Test
+    public void testCaseInsensitivity() {
+        ArrayList<String> fileLines = new ArrayList<>();
+        fileLines.add("Apple apple APPLE ApPlE");
+
+        Pair result = CountYourWords.count(fileLines);
+
+        assertEquals("Total words should be 4", 4, result.getFirst());
+
+        HashMap<String, Integer> expectedCounts = new HashMap<>();
+        expectedCounts.put("apple", 4);
+
+        assertEquals("Words should be counted in a case-insensitive manner", expectedCounts, result.getSecond());
+    }
+
+    // Test with punctuation
+    @Test
+    public void testPunctuation() {
+        ArrayList<String> fileLines = new ArrayList<>();
+        fileLines.add("Hello, world!! Welcome to Java.");
+
+        Pair result = CountYourWords.count(fileLines);
+
+        assertEquals("Total words should be 5", 5, result.getFirst());
+
+        HashMap<String, Integer> expectedCounts = new HashMap<>();
+        expectedCounts.put("hello", 1);
+        expectedCounts.put("world", 1);
+        expectedCounts.put("welcome", 1);
+        expectedCounts.put("to", 1);
+        expectedCounts.put("java", 1);
+
+        assertEquals("Words should be counted correctly despite punctuation", expectedCounts, result.getSecond());
+    }
+
+    // Test with numbers and symbols
+    @Test
+    public void testNumbersAndSymbols() {
+        ArrayList<String> fileLines = new ArrayList<>();
+        fileLines.add("Numbers 123 and symbols #!$");
+
+        Pair result = CountYourWords.count(fileLines);
+
+        assertEquals("Total words should be 3", 3, result.getFirst());
+
+        HashMap<String, Integer> expectedCounts = new HashMap<>();
+        expectedCounts.put("numbers", 1);
+        expectedCounts.put("and", 1);
+        expectedCounts.put("symbols", 1);
+
+        assertTrue("Word counts should ignore numbers and symbols", !(result.getSecond().containsKey("123") && result.getSecond().containsKey("#!$")));
+    }
+
+    // Test with empty and whitespace-only lines
+    @Test
+    public void testEmptyAndWhitespaceLines() {
+        ArrayList<String> fileLines = new ArrayList<>();
+        fileLines.add("");
+        fileLines.add("   ");
+        fileLines.add("\t\n");
+
+        Pair result = CountYourWords.count(fileLines);
+
+        assertEquals("Total words should be 0", 0, result.getFirst());
+        assertTrue("Word counts map should be empty", result.getSecond().isEmpty());
+    }
+
+    // Test with null input
+    @Test(expected = IllegalArgumentException.class)
+    public void testNullInput() {
+        CountYourWords.count(null);
+    }
+
+    // Test with lines containing null
+    @Test
+    public void testNullLines() {
+        ArrayList<String> fileLines = new ArrayList<>();
+        fileLines.add(null);
+        fileLines.add("Test line");
+        fileLines.add(null);
+
+        Pair result = CountYourWords.count(fileLines);
+
+        assertEquals("Total words should be 2", 2, result.getFirst());
+
+        HashMap<String, Integer> expectedCounts = new HashMap<>();
+        expectedCounts.put("test", 1);
+        expectedCounts.put("line", 1);
+
+        assertEquals("Words from null lines should be skipped", expectedCounts, result.getSecond());
+    }
+
+    // Test with an empty list
+
 }
