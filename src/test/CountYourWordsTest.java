@@ -1,7 +1,9 @@
 package test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -189,6 +191,35 @@ public class CountYourWordsTest {
         assertEquals("Words from null lines should be skipped", expectedCounts, result.getSecond());
     }
 
-    // Test with an empty list
+    // Read Text
+    // Test reading a non-existent file
+    @Test(expected = FileNotFoundException.class)
+    public void testFileNotFound() throws Exception {
+        String nonExistentFilePath = "nonExistentFile.txt";
 
+        CountYourWords.readFile(nonExistentFilePath);
+    }
+
+    // Test reading an empty file
+    @Test
+    public void testReadEmptyFile() throws Exception {
+        ArrayList<String> fileLines = CountYourWords.readFile("./src/test/textTests/emptyFile.txt");
+
+        // Assert
+        assertNotNull("File lines should not be null", fileLines);
+        assertEquals("File should contain 0 lines", 0, fileLines.size());
+    }
+
+    // Test reading a valid file with known content
+    @Test
+    public void testReadValidFile() throws Exception {
+        ArrayList<String> fileLines = CountYourWords.readFile("./src/test/textTests/emptyFile.txt");
+
+        // Assert
+        assertNotNull("File lines should not be null", fileLines);
+        assertEquals("File should contain 3 lines", 3, fileLines.size());
+        assertEquals("First line", fileLines.get(0));
+        assertEquals("Second line", fileLines.get(1));
+        assertEquals("Third line", fileLines.get(2));
+    }
 }
