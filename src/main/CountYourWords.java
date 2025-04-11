@@ -22,9 +22,25 @@ public class CountYourWords {
      * @param List of Strings
      * @return Int totalWords, HashMap[String, Integer] wordCounts
      */
-    public static Pair count(ArrayList<String> fileLines) {
+    public static Pair count(ArrayList<String> fileLines) throws IllegalArgumentException {
+        if (fileLines == null) throw new IllegalArgumentException();
+        
+        // Variables
         HashMap<String, Integer> wordCounts = new HashMap<>();
         int totalCount = 0;
+
+        for (String line : fileLines) {
+            if (line == null) continue;
+
+            // Case insensitive +  strange combinations aren't present (love4u or mail@address.nl)
+            String[] words = line.toLowerCase().replaceAll("[^a-z\\s]", "").split(" ");
+
+            // Adding to counts
+            for (String word: words) {
+                totalCount += 1;
+                wordCounts.put(word, wordCounts.getOrDefault(word, 0) + 1);
+            }
+        }
 
         return new Pair(totalCount, wordCounts);
     }
