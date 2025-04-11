@@ -1,5 +1,6 @@
 package main;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -46,22 +47,24 @@ public class CountYourWords {
     }
 
     /*
-     * Reads the file, it is assumed that the file uses periods as delimiters.
-     * 
-     * @param String path
-     * @return List of Strings
-     */
-    public static ArrayList<String> readFile(String path) throws Exception {
+    * Reads the file, it is assumed that the file uses periods as delimiters.
+    *
+    * @param path the file path
+    * @return List of Strings
+    * @throws FileNotFoundException if the file is not found
+    */
+    public static ArrayList<String> readFile(String path) throws FileNotFoundException {
         ArrayList<String> fileLines = new ArrayList<>();
         File file = new File(path);
-        Scanner sc = new Scanner(file);
-        sc.useDelimiter(".");
 
-        while (sc.hasNextLine()) {
-            fileLines.add(sc.nextLine());
+        try (Scanner sc = new Scanner(file)) {
+            sc.useDelimiter(".");
+
+            while (sc.hasNext()) {
+                fileLines.add(sc.next());
+            }
         }
 
-        sc.close();
         return fileLines;
     }
 }
