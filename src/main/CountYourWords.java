@@ -66,15 +66,14 @@ public class CountYourWords {
     public static ArrayList<String> readFile(String path) throws FileNotFoundException {
         ArrayList<String> fileLines = new ArrayList<>();
         File file = new File(path);
+        Scanner sc = new Scanner(file);
+        sc.useDelimiter(".");
 
-        try (Scanner sc = new Scanner(file)) {
-            sc.useDelimiter(".");
-
-            while (sc.hasNext()) {
-                fileLines.add(sc.next());
-            }
+        while (sc.hasNextLine()) {
+            fileLines.add(sc.nextLine());
         }
 
+        sc.close();
         return fileLines;
     }
 }
