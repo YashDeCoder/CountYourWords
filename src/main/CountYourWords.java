@@ -14,6 +14,16 @@ public class CountYourWords {
      */
     public static ArrayList<String> sort(HashMap<String, Integer> wordCounts) {
         ArrayList<String> sortedWordCounts = new ArrayList<>();
+        // Sort the words first
+        ArrayList<String> sortedWords = Sort.insertionSort(wordCounts.keySet().toArray(new String[0]));
+
+        // Now to add the values back
+        for (String word: sortedWords) {
+            String value = Integer.toString(wordCounts.get(word));
+            String fString = word + " " + value;
+            sortedWordCounts.add(fString);
+        }
+        
         return sortedWordCounts;
     }
     
