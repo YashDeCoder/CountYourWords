@@ -218,20 +218,34 @@ public class CountYourWordsTest {
         // Assert
         assertNotNull("File lines should not be null", fileLines);
         assertEquals("File should contain 3 lines", 3, fileLines.size());
-        assertEquals("First line.", fileLines.get(0));
-        assertEquals("Second line.", fileLines.get(1));
-        assertEquals("Third line.", fileLines.get(2));
+        assertEquals("First line", fileLines.get(0));
+        assertEquals("Second line", fileLines.get(1));
+        assertEquals("Third line", fileLines.get(2));
     }
 
+    @Test
+    public void fileNotPeriodExample() throws Exception {
+        ArrayList<String> fileLines = CountYourWords.readFile("./src/test/textTests/nonPeriodFile.txt");
+
+        // Assert
+        assertNotNull("File lines should not be null", fileLines);
+        assertEquals("File should contain 1 lines", 1, fileLines.size());
+        assertEquals("So this won't ! Split Lines", fileLines.get(0));
+    }
+    
     @Test
     public void finalTestWithExample() throws Exception {
         ArrayList<String> fileLines = CountYourWords.readFile("./src/test/textTests/exampleFile.txt");
 
         // Assert
         assertNotNull("File lines should not be null", fileLines);
-        assertEquals("File should contain 3 lines", 3, fileLines.size());
-        assertEquals("The big brown fox number 4 jumped over the lazy dog.", fileLines.get(0));
-        assertEquals("THE BIG BROWN FOX JUMPED OVER THE LAZY DOG.", fileLines.get(1));
-        assertEquals("The Big Brown Fox 123 !!", fileLines.get(2));
+        assertEquals("File should contain 7 lines", 7, fileLines.size());
+        assertEquals("", fileLines.get(0));
+        assertEquals("", fileLines.get(1));
+        assertEquals("", fileLines.get(2));
+        assertEquals("", fileLines.get(3));
+        assertEquals("The big brown fox number 4 jumped over the lazy dog", fileLines.get(4));
+        assertEquals("THE BIG BROWN FOX JUMPED OVER THE LAZY DOG", fileLines.get(5));
+        assertEquals("The Big Brown Fox 123 !!", fileLines.get(6));
     }
 }

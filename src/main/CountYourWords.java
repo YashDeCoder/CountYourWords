@@ -67,10 +67,10 @@ public class CountYourWords {
         ArrayList<String> fileLines = new ArrayList<>();
         File file = new File(path);
         Scanner sc = new Scanner(file);
-        sc.useDelimiter(".");
+        sc.useDelimiter("[.]");
 
-        while (sc.hasNextLine()) {
-            fileLines.add(sc.nextLine());
+        while (sc.hasNext()) {
+            fileLines.add(sc.next().trim());
         }
 
         sc.close();
