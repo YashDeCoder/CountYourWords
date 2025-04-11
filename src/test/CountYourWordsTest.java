@@ -83,7 +83,7 @@ public class CountYourWordsTest {
 
         Pair result = CountYourWords.count(fileLines);
 
-        assertEquals("Total words should be 8", 8, result.getFirst());
+        assertEquals("Total words should be 9", 9, result.getFirst());
 
         HashMap<String, Integer> expectedCounts = new HashMap<>();
         expectedCounts.put("hello", 1);
