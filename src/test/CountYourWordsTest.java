@@ -247,5 +247,38 @@ public class CountYourWordsTest {
         assertEquals("The big brown fox number 4 jumped over the lazy dog", fileLines.get(4));
         assertEquals("THE BIG BROWN FOX JUMPED OVER THE LAZY DOG", fileLines.get(5));
         assertEquals("The Big Brown Fox 123 !!", fileLines.get(6));
+
+        Pair result = CountYourWords.count(fileLines);
+
+        assertEquals("Total words should be 23", 23, result.getFirst());
+
+        HashMap<String, Integer> expectedCounts = new HashMap<>();
+        expectedCounts.put("big", 3);
+        expectedCounts.put("brown", 3);
+        expectedCounts.put("dog", 2);
+        expectedCounts.put("fox", 3);
+        expectedCounts.put("jumped", 2);
+        expectedCounts.put("lazy", 2);
+        expectedCounts.put("number",1);
+        expectedCounts.put("over", 2);
+        expectedCounts.put("the", 5);
+
+        assertEquals("Word counts should match expected counts", expectedCounts, result.getSecond());
+
+        ArrayList<String> sortedArray = CountYourWords.sort(result.getSecond());
+        
+        List<String> expectedKeys = Arrays.asList("big 3",
+            "brown 3",
+            "dog 2",
+            "fox 3",
+            "jumped 2",
+            "lazy 2",
+            "number 1",
+            "over 2",
+            "the 5"
+        );
+        List<String> actualKeys = sortedArray;
+
+        assertEquals("Keys should be sorted", expectedKeys, actualKeys);        
     }
 }
