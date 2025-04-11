@@ -9,7 +9,7 @@ public class Sort {
          * @param String[] containing words that need to be sorted
          * @return ArrayList<String> sortedArray
         */
-        public static ArrayList<String> insertionSort(String arr[]) {
+        public static ArrayList<String> insertionSort(String arr[]) throws IllegalArgumentException {
             if (arr == null) throw new IllegalArgumentException();
             
             int n = arr.length;
